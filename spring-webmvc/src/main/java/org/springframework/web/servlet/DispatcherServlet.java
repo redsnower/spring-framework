@@ -492,7 +492,7 @@ public class DispatcherServlet extends FrameworkServlet {
 	 */
 	@Override
 	protected void onRefresh(ApplicationContext context) {
-		initStrategies(context);
+		initStrategies(context);//初始化策略接口实现类
 	}
 
 	/**
@@ -503,11 +503,11 @@ public class DispatcherServlet extends FrameworkServlet {
 		initMultipartResolver(context);
 		initLocaleResolver(context);
 		initThemeResolver(context);
-		initHandlerMappings(context);
+		initHandlerMappings(context);//请求映射处理初始化
 		initHandlerAdapters(context);
-		initHandlerExceptionResolvers(context);
+		initHandlerExceptionResolvers(context);//异常处理初始化
 		initRequestToViewNameTranslator(context);
-		initViewResolvers(context);
+		initViewResolvers(context);//视图处理初始化
 		initFlashMapManager(context);
 	}
 
@@ -913,7 +913,7 @@ public class DispatcherServlet extends FrameworkServlet {
 		// Keep a snapshot of the request attributes in case of an include,
 		// to be able to restore the original attributes after the include.
 		Map<String, Object> attributesSnapshot = null;
-		if (WebUtils.isIncludeRequest(request)) {
+		if (WebUtils.isIncludeRequest(request)) {//判断是否为include请求
 			attributesSnapshot = new HashMap<>();
 			Enumeration<?> attrNames = request.getAttributeNames();
 			while (attrNames.hasMoreElements()) {
@@ -940,7 +940,7 @@ public class DispatcherServlet extends FrameworkServlet {
 		}
 
 		try {
-			doDispatch(request, response);
+			doDispatch(request, response);//请求分发处理
 		}
 		finally {
 			if (!WebAsyncUtils.getAsyncManager(request).isConcurrentHandlingStarted()) {
@@ -1014,7 +1014,7 @@ public class DispatcherServlet extends FrameworkServlet {
 
 				// Determine handler for the current request.
 				mappedHandler = getHandler(processedRequest);
-				if (mappedHandler == null) {
+				if (mappedHandler == null) {//没找到对应的请求地址处理
 					noHandlerFound(processedRequest, response);
 					return;
 				}
